@@ -40,7 +40,8 @@ public class BulletBehavior : MonoBehaviour {
                     Destroy(target);
                     */
                 }
-            }
+            Debug.Log("Destory");
             Destroy(gameObject);
-        }
+        }     
+    }
 }

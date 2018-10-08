@@ -14,12 +14,12 @@ public class EnemiesBehavior : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
-	}
+        target = GameObject.Find("Player");
+        lastShotTime = Time.time;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        target = GameObject.Find("Player");
         if (Time.time - lastShotTime > interval)
         {
             Shoot(target.GetComponent<Collider2D>());
