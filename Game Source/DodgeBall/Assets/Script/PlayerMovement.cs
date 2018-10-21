@@ -23,10 +23,10 @@ public class PlayerMovement : MonoBehaviour {
         // End of Accelerometer Input
         
         // Border of Movement
-        if (transform.position.x >= Screen.width / 100)
-            transform.position = new Vector2(Screen.width / 100 - 0.1f, transform.position.y);
-        if (transform.position.x <= -Screen.width / 100)
-            transform.position = new Vector2(-Screen.width / 100 + 0.1f, transform.position.y);
+        if (transform.position.x >= Screen.width / 100 + 4.3f)
+            transform.position = new Vector2(transform.position.x - 0.1f, transform.position.y);
+        if (transform.position.x <= -Screen.width / 100 - 4.3f)
+            transform.position = new Vector2(transform.position.x + 0.1f, transform.position.y);
         // End of Border of Movement
     }
 }

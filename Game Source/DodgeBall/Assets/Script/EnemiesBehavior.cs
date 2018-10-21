@@ -1,20 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemiesBehavior : MonoBehaviour {
-
-    [SerializeField] int healthPoint;
-    [SerializeField] float speed;
-    [SerializeField] float interval;
-    [SerializeField] float type;
-    [SerializeField] GameObject bulletPrefab;
     private float lastShotTime;
     GameObject target;
+    public GameObject bulletObject;
+    BulletPrefabs bulletPrefab;
+    EnemiesPrefabs enemiesPrefabs;
+    float interval;
 
     // Use this for initialization
     void Start () {
         target = GameObject.Find("Player");
+        enemiesPrefabs = gameObject.GetComponent<EnemiesPrefabs>();
+        interval = enemiesPrefabs.CurrentType.fireRate;
+        bulletPrefab = enemiesPrefabs.CurrentType.bullets;
         lastShotTime = Time.time;
     }
 	
@@ -37,11 +39,28 @@ public class EnemiesBehavior : MonoBehaviour {
         startPosition.z = bulletPrefab.transform.position.z;
         targetPosition.z = bulletPrefab.transform.position.z;
 
-        GameObject newBullet = (GameObject)Instantiate(bulletPrefab);
+        bulletObject.GetComponent<BulletPrefabs>().setCurrentType(bulletPercentage());
+        GameObject newBullet = (GameObject)Instantiate(bulletObject);
         newBullet.transform.position = startPosition;
         BulletBehavior bulletComp = newBullet.GetComponent<BulletBehavior>();
         bulletComp.target = target.gameObject;
         bulletComp.startPosition = startPosition;
         bulletComp.targetPosition = targetPosition;
+        bulletComp.circleCollider2D = newBullet.GetComponent<CircleCollider2D>();
+        bulletComp.circleCollider2D.radius = bulletObject.GetComponent<BulletPrefabs>().CurrentType.radius;
+    }
+
+    int bulletPercentage()
+    {
+        List<float> mBulletA = enemiesPrefabs.CurrentType.bulletsPercentage.ToList<float>();
+        mBulletA.Sort();
+        int index = 0;
+        float result = Random.Range(0.0F, 100.0F);
+        for (int i = mBulletA.Count -1 ; i >= 0; i--)
+        {
+            if (result < mBulletA[i])
+                index = i;
+        }
+        return index;
     }
 }
