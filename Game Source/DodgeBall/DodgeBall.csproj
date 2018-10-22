@@ -13,12 +13,18 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+<<<<<<< HEAD
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
+=======
+    <CompilerResponseFile>
+    </CompilerResponseFile>
+>>>>>>> 66594ff89b9453b8964d62d3d25c4a3d862969f4
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2017.1.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -126,7 +132,9 @@
     <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\RewardBasedVideoAdClient.cs" />
     <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\Utils.cs" />
     <Compile Include="Assets\Script\BulletBehavior.cs" />
+    <Compile Include="Assets\Script\BulletPrefabs.cs" />
     <Compile Include="Assets\Script\EnemiesBehavior.cs" />
+    <Compile Include="Assets\Script\EnemiesPrefabs.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\Player.cs" />
     <Compile Include="Assets\Script\PlayerMovement.cs" />
