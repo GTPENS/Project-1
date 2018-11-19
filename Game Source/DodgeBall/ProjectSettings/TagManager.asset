@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - MainMenuButton
+  - Bullets_dodge
   layers:
   - Default
   - TransparentFX

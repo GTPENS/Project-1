@@ -46,22 +46,26 @@ public class BulletPrefabs : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void OnEnable()
+    {
         CurrentType = types[0];
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
     public void setCurrentType(int typeSelected)
     {
         int currentTypeIndex = types.IndexOf(currentType);
-        if (currentTypeIndex < types.Count)
-        {
-            if (typeSelected < types.Count)
-                CurrentType = types[typeSelected];
-        }
+        if (typeSelected < types.Count)
+            CurrentType = types[typeSelected];
+    }
+
+    public int getCurretTypeIndex()
+    {
+        int currentTypeIndex = types.IndexOf(currentType);
+        return currentTypeIndex;
     }
 }

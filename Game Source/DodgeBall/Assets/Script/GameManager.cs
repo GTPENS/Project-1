@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
     //Declare Game Attribute
+    private static GameManager gameManager;
     private int healthPoint;
     private int score;
     private bool gameOver = false;
@@ -22,22 +24,28 @@ public class GameManager : MonoBehaviour {
     //End of Declare Game Attribute
 
     // Declare Game Object
-    public GameObject mPlayer;
+    public Player mPlayer;
     // End of Declare Game Object
 
-    //Setter-Getter
-    public int HealthPoint
+    private void Awake()
     {
-        get { return healthPoint; }
-        set { healthPoint = value; }
+        gameManager = this.gameObject.GetComponent<GameManager>();
     }
 
-    public int Score
+    // Get Instance of Game Manager
+    public static GameManager GetInstanceOfGameManager()
     {
-        get { return score; }
-        set { score = value; }
+        return gameManager;
     }
-    //End of Setter-Getter
+
+    // Use this for initialization
+    void Start()
+    {
+        mPlayer = GameObject.Find("Player").GetComponent<Player>();
+        HealthPoint = 3;
+        Score = 0;
+        initSpawnEnemies();
+    }
 
     //Spawn Enemies
     void initSpawnEnemies()
@@ -92,18 +100,40 @@ public class GameManager : MonoBehaviour {
     }
     //End of Spawn Enemies
 
-	// Use this for initialization
-	void Start () {
-        HealthPoint = 3;
-        Score = 0;
-        initSpawnEnemies();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Counter Attack Mechanic
+    public void CounterAttack_Engage()
+    {
+        if (CounterAttack_Treshold.collidedCT != null)
+        {
+            Debug.Log("Counter Enggage");
+            CounterAttack_Treshold.collidedCT.GetComponent<BulletBehavior>().CounterAttack();
+        }
+    }
+    // End of Counter Attack Mechanic
+
+    // Update is called once per frame
+    void Update () {
         if (gameStart)
+        {
             spawnEnemies();
+        }
+            
+
 	}
+
+    //Setter-Getter
+    public int HealthPoint
+    {
+        get { return healthPoint; }
+        set { healthPoint = value; }
+    }
+
+    public int Score
+    {
+        get { return score; }
+        set { score = value; }
+    }
+    //End of Setter-Getter
 }
 [System.Serializable]
 public class Wave
