@@ -16,9 +16,6 @@ public class Player : MonoBehaviour {
     {
         curDodge = 3;
         maxDodge = 3;
-        Collider collider = gameObject.GetComponentInChildren<Collider>();
-        // do whatever you want with the collider
-        collider.enabled = true;
     }
 
     // Update is called once per frame

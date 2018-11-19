@@ -8,12 +8,15 @@ public class BulletBehavior : MonoBehaviour {
     public GameObject target;
     public Vector3 startPosition;
     public Vector3 targetPosition;
+    [HideInInspector]
     public CircleCollider2D circleCollider2D;
     private float distance;
     private float startTime;
     private bool canCounter;
     public bool canDamage;
+    [HideInInspector]
     public float damage;
+    [HideInInspector]
     public int type;
 
 	// Use this for initialization

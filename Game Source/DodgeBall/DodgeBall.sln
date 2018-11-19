@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DodgeBall", "DodgeBall.csproj", "{E5F8AA3F-8A14-D950-9C7C-CD3E08648C1E}"
 EndProject
 Global

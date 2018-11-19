@@ -168,7 +168,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &315010641
 GameObject:
@@ -663,7 +663,7 @@ Transform:
   m_Children:
   - {fileID: 2083263651}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &649592273
 MonoBehaviour:
@@ -1096,11 +1096,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1298637133}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0059999973, y: 0.125, z: 0}
-  m_LocalScale: {x: 1.0488169, y: 0.16314101, z: 1}
+  m_LocalPosition: {x: 0.3228522, y: -6.961729, z: 0}
+  m_LocalScale: {x: 6.2929015, y: 0.9788461, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 1900725051}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1298637135
 CapsuleCollider2D:
@@ -1177,8 +1177,8 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1298637133}
-  m_BodyType: 0
-  m_Simulated: 0
+  m_BodyType: 2
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
@@ -1774,10 +1774,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.32285216, y: -7.711729, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 0.5}
-  m_Children:
-  - {fileID: 1298637134}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1900725052
 Rigidbody2D:

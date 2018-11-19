@@ -5,28 +5,25 @@ using UnityEngine;
 public class CounterAttack_Treshold : MonoBehaviour {
 
     public static GameObject collidedCT;
+    private GameObject mPlayer;
+
+    private void Start()
+    {
+        mPlayer = GameObject.Find("Player");
+    }
+
+    private void Update()
+    {
+        this.transform.position = new Vector2(mPlayer.transform.position.x, this.transform.position.y);
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision");
+        Debug.Log("OnCollision");
         if (collision.gameObject.GetComponent<BulletBehavior>().type == 0)
         {
             collidedCT = collision.gameObject;
             Debug.Log("Bullet in");
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Collision");
-        if (other.gameObject.GetComponent<BulletBehavior>().type == 0)
-        {
-            collidedCT = other.gameObject;
-            Debug.Log("Bullet in");
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        collidedCT = null;
     }
 }
