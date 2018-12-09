@@ -125,6 +125,7 @@
     <Compile Include="Assets\Script\EnemiesPrefabs.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\GameSceneManager.cs" />
+    <Compile Include="Assets\Script\mainMenu.cs" />
     <Compile Include="Assets\Script\Player.cs" />
     <Compile Include="Assets\Script\PlayerMovement.cs" />
     <Compile Include="Assets\Script\UIManager.cs" />

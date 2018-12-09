@@ -17,9 +17,9 @@ public class CounterAttack_Treshold : MonoBehaviour {
         this.transform.position = new Vector2(mPlayer.transform.position.x, this.transform.position.y);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("OnCollision");
+        Debug.Log(collision);
         if (collision.gameObject.GetComponent<BulletBehavior>().type == 0)
         {
             collidedCT = collision.gameObject;

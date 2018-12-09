@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 
     //Declare Game Attribute
     private static GameManager gameManager;
-    private int healthPoint;
+    private float healthPoint;
     private int score;
     private bool gameOver = false;
     private bool gameStart = false;
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour {
     void Start()
     {
         mPlayer = GameObject.Find("Player").GetComponent<Player>();
-        HealthPoint = 3;
+        HealthPoint = 100;
         Score = 0;
         initSpawnEnemies();
     }
@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour {
 	}
 
     //Setter-Getter
-    public int HealthPoint
+    public float HealthPoint
     {
         get { return healthPoint; }
         set { healthPoint = value; }

@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
 
     [SerializeField]
     private float speed = 0.1f;
-
+    private GameManager gameManager;
     public int curDodge;
     public int maxDodge;
     private Queue<float> lastTimeDodge = new Queue<float>();
@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         curDodge = 3;
         maxDodge = 3;
     }
@@ -70,4 +71,11 @@ public class Player : MonoBehaviour {
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bullets")
+        {
+            gameManager.HealthPoint -= collision.gameObject.GetComponent<BulletPrefabs>().CurrentType.damage;
+        }
+    }
 }

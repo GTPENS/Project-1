@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour {
     // Declare UI Component
     public Text dodgeText;
     public Text scoreText;
+    public Image healtBar;
     // End of Declare UI Component
 
 	// Use this for initialization
