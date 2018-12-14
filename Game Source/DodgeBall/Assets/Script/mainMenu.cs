@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class mainMenu : MonoBehaviour
@@ -104,6 +105,7 @@ public class mainMenu : MonoBehaviour
 
     public void onPlayButtonPRessed() {
         clickSFX.Play();
+        SceneManager.LoadScene("Gameplay");
         // DO SOMETHING HERE PAK BOSKO
     }
 

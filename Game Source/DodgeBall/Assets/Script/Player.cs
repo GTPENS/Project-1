@@ -56,7 +56,7 @@ public class Player : MonoBehaviour {
         if (curDodge > 0)
         {
             lastTimeDodge.Enqueue(Time.time);
-            transform.Translate(speed * 10, 0, 0);
+            transform.Translate(speed * 20, 0, 0);
             curDodge--;
         }
     }
@@ -66,7 +66,7 @@ public class Player : MonoBehaviour {
         if (curDodge > 0)
         {
             lastTimeDodge.Enqueue(Time.time);
-            transform.Translate(-(speed * 10), 0, 0);
+            transform.Translate(-(speed * 20), 0, 0);
             curDodge--;
         }
     }
@@ -76,6 +76,7 @@ public class Player : MonoBehaviour {
         if (collision.gameObject.tag == "Bullets")
         {
             gameManager.HealthPoint -= collision.gameObject.GetComponent<BulletPrefabs>().CurrentType.damage;
+            Destroy(collision.gameObject);
         }
     }
 }

@@ -13,6 +13,7 @@ public class BulletBehavior : MonoBehaviour {
     private float distance;
     private float startTime;
     private bool canCounter;
+    private bool backFire = false;
     public bool canDamage;
     [HideInInspector]
     public float damage;
@@ -31,8 +32,15 @@ public class BulletBehavior : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
        float timeInterval = Time.time - startTime;
-       gameObject.transform.position = Vector3.Lerp(startPosition, targetPosition, timeInterval * bulletPrefabs.CurrentType.speed / distance);
-        Debug.Log(bulletPrefabs.getCurretTypeIndex());
+        if (!backFire)
+            gameObject.transform.position = Vector3.Lerp(startPosition, targetPosition, timeInterval * bulletPrefabs.CurrentType.speed / distance);
+        else
+        {
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, startPosition, bulletPrefabs.CurrentType.speed / distance);
+            if (gameObject.transform.position.y >= 1.5)
+                Destroy(gameObject);
+        }
+
         switch (type)
         {
                 case 0:
@@ -43,22 +51,7 @@ public class BulletBehavior : MonoBehaviour {
                     break;
         }        
         if (gameObject.transform.position.Equals(targetPosition))
-       {
-            //  if (target != null)
-            // {
-            /*
-            // 3
-            Transform healthBarTransform = target.transform.Find("HealthBar");
-            HealthBar healthBar =
-                healthBarTransform.gameObject.GetComponent<HealthBar>();
-            healthBar.currentHealth -= Mathf.Max(damage, 0);
-            // 4
-            if (healthBar.currentHealth <= 0)
-            {
-                Destroy(target);
-                */
-            //           }
-            Debug.Log("Destory");
+        {
             Destroy(gameObject);
         }
     }
@@ -67,18 +60,9 @@ public class BulletBehavior : MonoBehaviour {
     {
         if (canCounter)
         {
-            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, startPosition, bulletPrefabs.CurrentType.speed / distance);
+            distance = Vector3.Distance(gameObject.transform.position, startPosition);
+            backFire = true;
             canDamage = true;
-            Debug.Log("Counter Enggage");
-        }
-    }
-
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.name == "Player")
-        {
-            Destroy(gameObject);
-            Debug.Log("Destory");
         }
     }
 }

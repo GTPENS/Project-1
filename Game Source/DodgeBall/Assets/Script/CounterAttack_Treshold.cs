@@ -19,11 +19,9 @@ public class CounterAttack_Treshold : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision);
         if (collision.gameObject.GetComponent<BulletBehavior>().type == 0)
         {
             collidedCT = collision.gameObject;
-            Debug.Log("Bullet in");
         }
     }
 }

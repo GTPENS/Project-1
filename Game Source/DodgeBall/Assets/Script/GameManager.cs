@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     private static GameManager gameManager;
     private float healthPoint;
     private int score;
-    private bool gameOver = false;
+    public bool gameOver = false;
     private bool gameStart = false;
 
     [HideInInspector]
@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
     private int currentEnemiesSpawn = 0;
     private int enemiesSpawned = 0;
     private static int index = 0;
+    private static int indexPos = 0;
     int currentWave;
     //End of Declare Game Attribute
 
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour {
         HealthPoint = 100;
         Score = 0;
         initSpawnEnemies();
+        waves[currentWave].updateMaxEnemies();
     }
 
     //Spawn Enemies
@@ -52,7 +54,6 @@ public class GameManager : MonoBehaviour {
     {
         lastSpawnTime = Time.time;
         currentWave = 0;
-        waves[currentWave].updateMaxEnemies();
         gameStart = true;
         Debug.Log("Game Start: " + gameStart);
     }
@@ -61,38 +62,41 @@ public class GameManager : MonoBehaviour {
     {
         if (currentWave < waves.Length)
         {
-            float timeInterval = Time.time - lastSpawnTime;
-            float spawnInterval = waves[currentWave].interval;
             if (enemiesSpawned != waves[currentWave].maxEnemies)
             {
                 if (index < waves[currentWave].enemyNums.Length)
                 {
-                    if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || 
-                        timeInterval > spawnInterval) && enemiesSpawned < waves[currentWave].maxEnemies && 
-                        currentEnemiesSpawn < waves[currentWave].enemyNums[index]){
-                        lastSpawnTime = Time.time;
+                    if (enemiesSpawned == 0 || (enemiesSpawned < waves[currentWave].maxEnemies && 
+                        currentEnemiesSpawn < waves[currentWave].enemyNums[index]))
+                    {
+                        if (indexPos > 3)
+                        {
+                            indexPos = 0;
+                        }
                         //waves[currentWave].enemiesPrefab.GetComponent<EnemiesPrefabs>().setCurrentType(waves[currentWave].types[index]);
-                        GameObject newEnemy = (GameObject)Instantiate(waves[currentWave].enemiesPrefab, waves[currentWave].position[index], Quaternion.identity);
+                        GameObject newEnemy = (GameObject)Instantiate(waves[currentWave].enemiesPrefab, waves[currentWave].position[indexPos], Quaternion.identity);
                         newEnemy.GetComponent<EnemiesPrefabs>().setCurrentType(waves[currentWave].types[index]);
                         listEnemies.Add(newEnemy);
                         enemiesSpawned++;
                         currentEnemiesSpawn++;
+                        indexPos++;
                     }
                     else if (currentEnemiesSpawn == waves[currentWave].enemyNums[index])
                     {
                         currentEnemiesSpawn = 0;
                         index++;
                     }
-                }
+                }    
             }
-            if (enemiesSpawned == waves[currentWave].maxEnemies && GameObject.FindGameObjectWithTag("Enemy") == null)
+            else if (enemiesSpawned == waves[currentWave].maxEnemies && GameObject.FindGameObjectWithTag("Enemy") == null)
             {
                 enemiesSpawned = 0;
                 currentEnemiesSpawn = 0;
                 index = 0;
+                indexPos = 0;
                 currentWave++;
-                lastSpawnTime = Time.time;
-                waves[currentWave].updateMaxEnemies();
+                if (currentWave < waves.Length)
+                    waves[currentWave].updateMaxEnemies();               
             }
         }else{
             gameOver = true;
@@ -105,7 +109,6 @@ public class GameManager : MonoBehaviour {
     {
         if (CounterAttack_Treshold.collidedCT != null)
         {
-            Debug.Log("Counter Enggage");
             CounterAttack_Treshold.collidedCT.GetComponent<BulletBehavior>().CounterAttack();
         }
     }
@@ -115,10 +118,11 @@ public class GameManager : MonoBehaviour {
     void Update () {
         if (gameStart)
         {
-            spawnEnemies();
+            if (!gameOver)
+                spawnEnemies();
+            if (HealthPoint <= 0)
+                gameOver = true;
         }
-            
-
 	}
 
     //Setter-Getter
@@ -133,18 +137,32 @@ public class GameManager : MonoBehaviour {
         get { return score; }
         set { score = value; }
     }
+
+    public int CurrentWave
+    {
+        get { return currentWave; }
+    }
     //End of Setter-Getter
 }
 [System.Serializable]
 public class Wave
 {
-    public Vector3[] position;
+    [HideInInspector]
+    public Vector3[] position = new Vector3[3];
     public GameObject enemiesPrefab;
     public int[] types;
     public int[] enemyNums;
     public float interval;
     [HideInInspector]
     public int maxEnemies;
+
+    public Wave()
+    {
+        position[0] = new Vector3() {x = 0f, y = 1.5f, z = -2f};
+        position[1] = new Vector3() { x = -4.19f, y = 1.5f, z = -2f };
+        position[2] = new Vector3() { x = 4f, y = 1.5f, z = -2f };
+    }
+
     public void updateMaxEnemies()
     {
         for (int i = 0; i < this.enemyNums.Length; i++)
